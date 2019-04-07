@@ -21,6 +21,9 @@ public class Episode {
     @Column(name = "episode_id")
     private int id;
 
+    @Column(name = "tvmaze_id", nullable = false, unique = true)
+    private int tvmazeId;
+
     @Column(name = "name")
     private String name;
 

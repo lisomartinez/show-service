@@ -36,4 +36,9 @@ public class DayOfWeek {
     public static DayOfWeek of(String day) {
         return new DayOfWeek(day);
     }
+
+    @Override
+    public String toString() {
+        return day;
+    }
 }

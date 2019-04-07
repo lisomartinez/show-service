@@ -15,12 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "show")
+@Table(name = "shows")
 public class Show {
 
     @Id
     @Column(name = "show_id")
     private int id;
+
+    @Column(name = "tvmaze_id", nullable = false, unique = true)
+    private int tvmazeId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -31,12 +34,10 @@ public class Show {
     @Column(name = "language", nullable = false)
     private String language;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "show_genre",
-            joinColumns = @JoinColumn(name = "show_id"),
-            foreignKey = @ForeignKey(name = "fk_show_genre_genre"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id"),
-            inverseForeignKey = @ForeignKey(name = "fk_show_genre_show")
+            joinColumns = @JoinColumn(name = "shows_show_id"),
+            foreignKey = @ForeignKey(name = "fk_show_genre_genre")
     )
     private List<Genre> genres;
 
@@ -58,6 +59,9 @@ public class Show {
             nullable = false,
             unique = true)
     private Schedule schedule;
+
+    @Column(name = "rating", nullable = false)
+    private double rating;
 
     @Column(name = "imdb_url", nullable = false)
     private String imdb;

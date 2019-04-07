@@ -31,6 +31,7 @@ public class Schedule {
     )
     private List<DayOfWeek> days;
 
+
     @Column(name = "time_of_show")
     private LocalTime time;
 

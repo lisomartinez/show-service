@@ -21,6 +21,9 @@ public class Season {
     @Column(name = "season_id")
     private int id;
 
+    @Column(name = "tvmaze_id", nullable = false, unique = true)
+    private int tvmazeId;
+
     @Column(name = "number", nullable = false)
     private int number;
 
