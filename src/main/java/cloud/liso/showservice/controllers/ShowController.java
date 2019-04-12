@@ -1,9 +1,7 @@
 package cloud.liso.showservice.controllers;
 
 import cloud.liso.showservice.dto.MinSeasonDto;
-import cloud.liso.showservice.dto.ShowCardDto;
 import cloud.liso.showservice.dto.ShowDto;
-import cloud.liso.showservice.model.ShowCard;
 import cloud.liso.showservice.services.SeasonService;
 import cloud.liso.showservice.services.ShowService;
 import io.swagger.annotations.Api;
@@ -78,16 +76,4 @@ public class ShowController {
 //        return modelMapper.map(showService.getLastEpisode(showId), EpisodeDto.class);
 //    }
 
-    @GetMapping(SHOWS + CARDS)
-    @ResponseStatus(OK)
-    public Page<ShowCardDto> getShowCards(@RequestParam(defaultValue = "0") int page,
-                                          @RequestParam(defaultValue = "25") int size) {
-        return showService.getShowCardPage(page, size);
-    }
-
-    @GetMapping(SHOWS + INDEX)
-    @ResponseStatus(OK)
-    public List<ShowCard> getGenreShowCards() {
-        return showService.getShowCards();
-    }
 }

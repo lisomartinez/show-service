@@ -1,15 +1,14 @@
 package cloud.liso.showservice.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -35,7 +34,46 @@ public class Genre {
         this.name = genre;
     }
 
+    public Genre(String name, List<Show> shows) {
+        this.name = name;
+        this.shows = shows;
+    }
+
     public static Genre of(String genre) {
         return new Genre(genre);
+    }
+
+    public static Genre of(String genre, List<Show> shows) {
+        return new Genre(genre, shows);
+    }
+
+    public void addShow(Show show) {
+        shows.add(show);
+    }
+
+    public void removeShow(Show show) {
+        shows.remove(show);
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Genre genre = (Genre) o;
+        return id == genre.id &&
+                name.equals(genre.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

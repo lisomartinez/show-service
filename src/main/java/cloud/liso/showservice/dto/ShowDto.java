@@ -53,6 +53,7 @@ public class ShowDto {
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime lastUpdate;
 
 }

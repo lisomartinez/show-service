@@ -3,6 +3,7 @@ package cloud.liso.showservice.controllers;
 import cloud.liso.showservice.dto.GenreDto;
 import cloud.liso.showservice.dto.ShowCardDto;
 import cloud.liso.showservice.model.ShowCard;
+import cloud.liso.showservice.services.BrowserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

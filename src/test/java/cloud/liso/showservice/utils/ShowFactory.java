@@ -41,21 +41,26 @@ public class ShowFactory {
     public static Show getShowWithGenreAndSchedule(LocalDateTime lastUpdate, String status) {
         Show show = getShowBase();
         show.setSchedule(getScheduleWithId());
-        show.setGenres(getGenresWithId());
+//        show.setGenres(getGenresWithId());
+        show.setGenres(new ArrayList<>());
+        List<Genre> genresWithId = getGenresWithId();
+        for (Genre genre : genresWithId) {
+            show.addGenre(genre);
+        }
         show.setLastUpdate(lastUpdate);
         show.setStatus(status);
         return show;
     }
 
     private static List<Genre> getGenresWithId() {
-        Genre drama = new Genre("Drama");
-        Genre science_fiction = new Genre("Science-Fiction");
-        Genre thriller = new Genre("Thriller");
+        Genre drama = new Genre(1, "Drama", new ArrayList<>());
+        Genre science_fiction = new Genre(2, "Science-Fiction", new ArrayList<>());
+        Genre thriller = new Genre(3, "Thriller", new ArrayList<>());
         return Arrays.asList(drama, science_fiction, thriller);
     }
 
     private static Schedule getScheduleWithId() {
-        return new Schedule(new ArrayList<>(Arrays.asList(DayOfWeek.of(DayOfWeek.THURSDAY))), LocalTime.of(22, 0));
+        return new Schedule(1, new ArrayList<>(Arrays.asList(DayOfWeek.of(DayOfWeek.THURSDAY))), LocalTime.of(22, 0));
     }
 
     public static Show getShowComplete(LocalDateTime lastUpdate, String status) throws IOException {
@@ -130,13 +135,13 @@ public class ShowFactory {
     }
 
     public static Schedule getSchedule() {
-        return Schedule.of(new ArrayList<>(Arrays.asList(DayOfWeek.of(DayOfWeek.THURSDAY))), LocalTime.of(22, 0));
+        return new Schedule(1, new ArrayList<>(Arrays.asList(DayOfWeek.of(DayOfWeek.THURSDAY))), LocalTime.of(22, 0));
     }
 
     public static List<Genre> getGenres() {
-        Genre drama = Genre.of("Drama");
-        Genre science_fiction = Genre.of("Science-Fiction");
-        Genre thriller = Genre.of("Thriller");
+        Genre drama = new Genre(1, "Drama", new ArrayList<>());
+        Genre science_fiction = new Genre(2, "Science-Fiction", new ArrayList<>());
+        Genre thriller = new Genre(3, "Thriller", new ArrayList<>());
         return Arrays.asList(drama, science_fiction, thriller);
     }
 
@@ -237,11 +242,15 @@ public class ShowFactory {
 //                .collect(Collectors.toList());
 //    }
 
-//    public static List<Season> getSeasonsWithEpisodes() throws IOException {
-//        List<Season> seasons = getSeasons();
-//        seasons.get(0).setEpisodes(getEpisodesFromSeason(1));
-//        seasons.get(1).setEpisodes(getEpisodesFromSeason(2));
-//        seasons.get(2).setEpisodes(getEpisodesFromSeason(3));
-//        return seasons;
-//    }
+    public static String getImdb() {
+        return "https://www.imdb.com/title/tt1553656";
+    }
+
+    public static String getImdbVideo() {
+        return "vi3897206297";
+    }
+
+    public static String getImdbVideoFullURL() {
+        return "https://www.imdb.com/title/tt1553656/videoplayer/vi3897206297";
+    }
 }

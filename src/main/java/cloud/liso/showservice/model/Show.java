@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -89,6 +90,30 @@ public class Show {
     public void removeSeason(Season season) {
         seasons.remove(season);
         season.setShow(null);
+    }
+
+    public void addGenre(Genre genre) {
+        genres.add(genre);
+        genre.addShow(this);
+    }
+
+    public void removeGenre(Genre genre) {
+        genres.remove(genre);
+        genre.removeShow(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Show show = (Show) o;
+        return id == show.id &&
+                name.equals(show.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
     

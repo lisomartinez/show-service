@@ -1,4 +1,4 @@
-package cloud.liso.showservice.controllers;
+package cloud.liso.showservice.services;
 
 import cloud.liso.showservice.model.ShowCard;
 
