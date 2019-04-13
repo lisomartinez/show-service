@@ -1,6 +1,7 @@
 package cloud.liso.showservice.utils;
 
 import cloud.liso.showservice.model.*;
+import cloud.liso.showservice.services.imdb.HttpImdbService;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -9,6 +10,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ShowFactory {
 
@@ -189,20 +192,20 @@ public class ShowFactory {
         return seasons;
     }
 
-//    public static Season getLastSeasonWithEpisodes(Show show) throws IOException {
-//        return Season.builder()
-//                .id(6233)
-//                .show(show)
-//                .number(3)
-//                .episodeOrder(13)
-//                .premiereDate(LocalDate.of(2015, 6, 25))
-//                .endDate(LocalDate.of(2015, 9, 10))
-//                .image("http://static.tvmaze.com/uploads/images/original_untouched/182/457332.jpg")
-//                .tvMaze("http://www.tvmaze.com/seasons/6233/under-the-dome-season-3")
-//                .summary("N/A")
-//                .episodes(getEpisodesFromSeason(3))
-//                .build();
-//    }
+    public static Season getLastSeasonWithEpisodes(Show show) {
+        return Season.builder()
+                .id(6233)
+                .show(show)
+                .number(3)
+                .episodeOrder(13)
+                .premiereDate(LocalDate.of(2015, 6, 25))
+                .endDate(LocalDate.of(2015, 9, 10))
+                .image("http://static.tvmaze.com/uploads/images/original_untouched/182/457332.jpg")
+                .tvMaze("http://www.tvmaze.com/seasons/6233/under-the-dome-season-3")
+                .summary("N/A")
+                .episodes(IntStream.rangeClosed(1, 10).mapToObj(i -> new Episode()).collect(Collectors.toList()))
+                .build();
+    }
 
     public static Season createLastSeasonWithoutEpisodes(Show show) throws IOException {
         return Season.builder()
@@ -243,7 +246,7 @@ public class ShowFactory {
 //    }
 
     public static String getImdb() {
-        return "https://www.imdb.com/title/tt1553656";
+        return HttpImdbService.IMDB_BASE_URL;
     }
 
     public static String getImdbVideo() {
@@ -251,6 +254,6 @@ public class ShowFactory {
     }
 
     public static String getImdbVideoFullURL() {
-        return "https://www.imdb.com/title/tt1553656/videoplayer/vi3897206297";
+        return HttpImdbService.IMDB_BASE_URL + "vi3897206297";
     }
 }

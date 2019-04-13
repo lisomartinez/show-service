@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class HttpImdbService implements ImdbService {
 
     private static final String NOT_AVAILABLE = "N/A";
-    private static final String IMDB_BASE_URL = "https://www.imdb.com/title/tt1553656/videoplayer/";
+    public static final String IMDB_BASE_URL = "https://www.imdb.com/videoembed/";
 
     private WebClient client;
     private WebpageParser parse;
